@@ -2,6 +2,7 @@ import csv
 import math
 import heapq
 
+
 def load_csv(file):
     iris_set = []
     with open(file, 'r') as f:
@@ -10,11 +11,13 @@ def load_csv(file):
             iris_set.append(row)
     return iris_set
 
+
 def euclidean_distance(row1, row2):
     dist = 0
     for i in range(len(row1) - 1):
         dist += math.sqrt((float(row1[i]) - float(row2[i])) ** 2)
     return dist
+
 
 def get_neighbors(train, t_row, k=1):
     distances = list()
@@ -39,9 +42,9 @@ def knn(train_file, test_file, k):
     for row in test:
         output = predict_class(train, row, k)
         pred.append(output)
-    actual=load_csv(test_file)
-    acc=accuracy(actual,pred)
-    return acc,pred
+    actual = load_csv(test_file)
+    acc = accuracy(actual, pred)
+    return acc, pred
 
 
 def accuracy(act, predict):
@@ -51,7 +54,7 @@ def accuracy(act, predict):
             correct += 1
     print(f"All classifications: {len(act)}")
     print(f"Correct classifications: {correct}")
-    return correct / float(len(act))* 100.0
+    return correct / float(len(act)) * 100.0
 
 
 def single(train_file, arr, k):
@@ -76,7 +79,7 @@ if __name__ == "__main__":
                 print(f"Predicted class: {single(train_set, arr, k)}")
             case "2":
                 k = int(input("Enter the number of neighbors:"))
-                acc,predictions = knn(train_set, test_set, k)
+                acc, predictions = knn(train_set, test_set, k)
                 print(f'The accuracy of this classification: {acc:.3f}%')
             case "3":
                 break
